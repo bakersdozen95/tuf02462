@@ -1,0 +1,103 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Signup!</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+		<link href="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.css" rel="stylesheet">
+		<link href="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.0/jquery.mobile-1.4.0.css" rel="stylesheet">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+		<script src="https://s3.amazonaws.com/codiqa-cdn/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+		<script src="https://s3.amazonaws.com/codiqa-cdn/codiqa.ext.js"></script>
+	</head>
+	<script type="text/javascript">
+
+  function checkForm(form)
+  {
+   
+    if(form.email.value == "") {
+      alert("Error: Username cannot be blank!");
+      form.email.focus();
+      return false;
+    }
+
+    if(form.paswd1.value != "" && form.paswd1.value == form.paswd2.value) {
+      if(form.paswd1.value.length < 6) {
+        alert("Error: Password must contain at least six characters!");
+        form.paswd1.focus();
+        return false;
+      }
+      if(form.paswd1.value == form.email.value) {
+        alert("Error: Password must be different from Username!");
+        form.paswd1.focus();
+        return false;
+      }
+      re = /[0-9]/;
+      if(!re.test(form.paswd1.value)) {
+        alert("Error: password must contain at least one number (0-9)!");
+        form.paswd1.focus();
+        return false;
+      }
+      re = /[a-z]/;
+      if(!re.test(form.paswd1.value)) {
+        alert("Error: password must contain at least one lowercase letter (a-z)!");
+        form.paswd1.focus();
+        return false;
+      }
+      re = /[A-Z]/;
+      if(!re.test(form.paswd1.value)) {
+        alert("Error: password must contain at least one uppercase letter (A-Z)!");
+        form.paswd1.focus();
+        return false;
+      }
+    } else {
+      alert("Error: Please check that you've entered and confirmed your password!");
+      form.paswd1.focus();
+      return false;
+    }
+
+    alert("You entered a valid password: " + form.paswd1.value);
+    return true;
+  }
+
+</script>
+	<body>
+		<div data-role="page" data-control-title="Signup" id="signup">
+			<div data-theme="" data-role="header">
+				<span class="ui-title">
+					Signup!
+				</span>
+			</div>
+			<div role="main" class="ui-content">
+				<div data-role="navbar" data-iconpos="top">
+					<ul>
+						<li>
+							<a href="index.html" data-transition="" data-theme="" data-icon="home">
+								Home
+							</a>
+						</li>
+					</ul>
+				</div>
+				<div style=" text-align:center" data-controltype="image" id="spellingbee">
+					<img style="width: 50%; height: 50%" src="http://www.riverdalechurch.org/images/signupbutton_02.jpg">
+				</div>
+				<form action="php/signup.php" method="post" data-ajax="false" onsubmit="return checkForm(this);">
+					<div data-role="fieldcontain" data-controltype="textinput">
+						<input name="email" id="email" placeholder="Email" value="" type="email">
+					</div>
+					<div data-role="fieldcontain" data-controltype="textinput">
+						<input name="paswd" id="paswd1" placeholder="Password" value="" type="password">
+					</div>
+					<div data-role="fieldcontain" data-controltype="textinput">
+						<input name="paswd" id="paswd2" placeholder="Confirm Password" value="" type="password">
+					</div>
+					<input id="signup" type="submit" data-theme="b" value="Signup">
+				</form>
+			</div>
+		</div>
+	</body>
+</html>
